@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Styles/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Styles/normal_button_theme.tres" type="StyleBox" id=2]
+[ext_resource path="res://Styles/Hover_button_theme.tres" type="StyleBox" id=3]
+[ext_resource path="res://Styles/Pressed_button_theme.tres" type="StyleBox" id=4]
+[ext_resource path="res://Scripts/menu_pause.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/settings_menu.tscn" type="PackedScene" id=6]
+
+[node name="menu_pause" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+
+[node name="Main_menu" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0.152941, 0.152941, 0.152941, 1 )
+
+[node name="Pause_Label" type="Label" parent="Main_menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -77.5
+margin_right = 77.5
+margin_bottom = 58.0
+theme = ExtResource( 1 )
+text = "Пауза"
+align = 1
+valign = 1
+
+[node name="Continie_Button" type="Button" parent="Main_menu"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -124.5
+margin_top = -181.0
+margin_right = 124.5
+margin_bottom = -119.0
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+text = "Продолжить"
+
+[node name="Exit_Button" type="Button" parent="Main_menu"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 328.0
+margin_top = 259.0
+margin_right = 577.0
+margin_bottom = 321.0
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+text = "Выйти с игры"
+
+[node name="Settings_Button" type="Button" parent="Main_menu"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -124.5
+margin_top = -11.0
+margin_right = 124.5
+margin_bottom = 51.0
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+text = "Настройки"
+
+[node name="Save_Button" type="Button" parent="Main_menu"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -124.0
+margin_top = -96.0
+margin_right = 125.0
+margin_bottom = -35.0
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+text = "Сохранить игру"
+
+[node name="GameSave_Label" type="Label" parent="Main_menu/Save_Button"]
+visible = false
+margin_left = -516.0
+margin_top = -264.0
+margin_right = -306.0
+margin_bottom = -237.0
+text = "Игра сохранена"
+
+[node name="Timer" type="Timer" parent="Main_menu/Save_Button/GameSave_Label"]
+
+[node name="SettingsMenu" parent="." instance=ExtResource( 6 )]
+
+[connection signal="pressed" from="Main_menu/Continie_Button" to="." method="_on_Continie_Button_pressed"]
+[connection signal="pressed" from="Main_menu/Exit_Button" to="." method="_on_Exit_Button_pressed"]
+[connection signal="pressed" from="Main_menu/Settings_Button" to="." method="_on_Settings_Button_pressed"]
+[connection signal="pressed" from="Main_menu/Save_Button" to="." method="_on_Save_Button_pressed"]
+[connection signal="timeout" from="Main_menu/Save_Button/GameSave_Label/Timer" to="." method="_on_Timer_timeout"]
