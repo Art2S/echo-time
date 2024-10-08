@@ -20,6 +20,7 @@ func _on_Settings_Button_pressed():
 func _on_Continie_Button_pressed():
 	Singleton.save_settings()
 	Singleton.pausee(0)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	queue_free()
 
 
@@ -31,3 +32,7 @@ func _on_Save_Button_pressed():
 
 func _on_Timer_timeout():
 	$Main_menu/Save_Button/GameSave_Label.hide()
+
+
+func _on_Exit_Menu_Button_pressed():
+	Singleton.change_scene("res://Scenes/Menu.tscn")

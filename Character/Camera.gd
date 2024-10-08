@@ -1,17 +1,37 @@
-extends Camera
+extends Position3D
 
-var target = null
+export(NodePath) var target_node
+var target
+var camera
+var rot_y = 0
 
 func _ready():
-	Singleton.camera = self
+	target = get_node(target_node)
+	camera = $Camera
+
 
 func _process(delta):
-	if target:
-		transform.origin = transform.origin.linear_interpolate(target.transform.origin + target.cam_pos.rotated(Vector3.UP, target.rotation.y), 10 * delta)
-		transform.basis = Basis(transform.basis.get_rotation_quat().slerp(target.transform.basis.get_rotation_quat(), 10 * delta))
-		
-		
+	transform.origin = target.transform.origin + Vector3(0,1,0)
+	
+	if Input.is_action_pressed("up"):
+		rot_y = rotation.y
+	if Input.is_action_pressed("down"):
+		rot_y = rotation.y - PI
+	if Input.is_action_pressed("left"):
+		rot_y = rotation.y + PI/2
+	if Input.is_action_pressed("right"):
+		rot_y = rotation.y - PI/2
+	
+	if Singleton.player.state_body != "idle":
+		target.transform.basis = Basis(target.transform.basis.get_rotation_quat().slerp(Basis(Vector3.UP, rot_y).get_rotation_quat(), 5 * delta))
+	
+	if $Detector.is_colliding():
+		camera.transform.origin.z = $Detector.get_collision_point().distance_to(global_transform.origin) - 0.5
+	else:
+		camera.transform.origin.z = 4
 
-func upd_target(t):
-	target = t
-
+func _input(event):
+	if event is InputEventMouseMotion:
+		rotation.y -= event.relative.x * 0.01
+		rotation.x = clamp(rotation.x - event.relative.y * 0.01, -1, 0.1)
+		

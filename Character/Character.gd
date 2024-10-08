@@ -1,16 +1,15 @@
 extends KinematicBody
 
-const SPEED = 3
+var SPEED = 3
 
-export var SPEED_TURN = 0.005
-export var SPEED_MOVE = 0
+export var MOVE = 0
 export var SPEED_FALL = 0.3
 export var SPEED_JUMP = 7
 
 var speed_animations = {
 	'run' : 2
 }
-export var state_cam = 'idle_1'
+
 export var state_body = 'idle'
 
 var vel = Vector3()
@@ -31,62 +30,43 @@ func _physics_process(_delta):
 	
 	
 	if Input.is_action_pressed("up"):
-		SPEED_MOVE = -1
+		MOVE = -1
 	if Input.is_action_pressed("down"):
-		SPEED_MOVE = -1
+		MOVE = -1
 	if Input.is_action_pressed("left"):
-		SPEED_MOVE = -1
+		MOVE = -1
 	if Input.is_action_pressed("right"):
-		SPEED_MOVE = -1
+		MOVE = -1
+	
+	if not Input.is_action_pressed("up"):
+		if not Input.is_action_pressed("down"):
+			if not Input.is_action_pressed("left"):
+				if not Input.is_action_pressed("right"):
+					MOVE = 0
 	
 	
-	if Input.is_action_just_pressed("view"):
-		if Singleton.view == 'first':
-			Singleton.view = 'third'
-		elif Singleton.view == 'third':
-			Singleton.view = 'first'
-	
-	if Input.is_action_pressed("run"):
-		state_body = 'run'
-		if Singleton.view == 'first':
-			state_cam = 'run_1'
-		elif Singleton.view == 'third':
-			state_cam = 'run_3'
-			
-
-	
-	
-	
-	
-	if Input.is_action_just_pressed("jump"):
+		
+	if Input.is_action_pressed("jump"):
 		if is_on_floor():
 			vel.y = SPEED_JUMP
 	
-	if SPEED_MOVE:
-		vel.z = SPEED_MOVE * SPEED
+	if MOVE:
+		vel.z = MOVE * SPEED
 		vel = vel.rotated(Vector3.UP, rotation.y)
-	
-	
-		if not Input.is_action_pressed("run"):
+		if Input.is_action_pressed("run"):
+			state_body = 'run'
+			SPEED = 6
+		else:
 			state_body = 'move'
-			if Singleton.view == 'first':
-				state_cam = 'move_1'
-			elif Singleton.view == 'third':
-				state_cam = 'move_3'
+			SPEED = 3
 	else:
 		state_body = 'idle'
-		if Singleton.view == 'first':
-			state_cam = 'idle_1'
-		elif Singleton.view == 'third':
-			state_cam = 'idle_3'
 	
 	
 	vel = move_and_slide(vel, Vector3.UP, false, 4, 0.785398, false)
 	
-	if Input.is_action_pressed("Z"):
+	if Input.is_action_pressed("Z"): #Пасхалко, простите)
 		state_body = 'Z'
-	
-	
 	if $Player_body/Animation_Player.current_animation != state_body:
 		if speed_animations.has(state_body):
 			$Player_body/Animation_Player.playback_speed = speed_animations[state_body]

@@ -103,6 +103,22 @@ text = "Игра сохранена"
 
 [node name="Timer" type="Timer" parent="Main_menu/Save_Button/GameSave_Label"]
 
+[node name="Exit_Menu_Button" type="Button" parent="Main_menu"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -572.0
+margin_top = 259.0
+margin_right = -323.0
+margin_bottom = 321.0
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+text = "Выйти в меню"
+
 [node name="SettingsMenu" parent="." instance=ExtResource( 6 )]
 
 [connection signal="pressed" from="Main_menu/Continie_Button" to="." method="_on_Continie_Button_pressed"]
@@ -110,3 +126,4 @@ text = "Игра сохранена"
 [connection signal="pressed" from="Main_menu/Settings_Button" to="." method="_on_Settings_Button_pressed"]
 [connection signal="pressed" from="Main_menu/Save_Button" to="." method="_on_Save_Button_pressed"]
 [connection signal="timeout" from="Main_menu/Save_Button/GameSave_Label/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="Main_menu/Exit_Menu_Button" to="." method="_on_Exit_Menu_Button_pressed"]

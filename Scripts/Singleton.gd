@@ -6,7 +6,7 @@ const SaveGame = "user://Echo_SaveGame.save"
 var game_data = {}
 var game_save = {}
 var config
-
+var is_pause :bool = false
 var player = null
 var camera = null
 var game = null
@@ -33,9 +33,9 @@ func load_settings():
 	var file = File.new()
 	if not file.file_exists(SaveData):
 		game_data = {
-			"fullscreen_on": false,
+			"fullscreen_on": true,
 			"vsync_on": false,
-			"display_fps": false,
+			"display_fps": true,
 			"max_fps": 0,
 			"bloom_on": false,
 			"brightness": 0.5,
@@ -84,23 +84,12 @@ func delete_save():
 
 
 func change_scene(scene_name):
-	var next_scene = load(scene_name)
-	if next_scene:
-		var new_scene = next_scene.instance()
-		var root = get_tree().get_root()
-		var current_scene = root.get_child(root.get_child_count() - 1)
-		root.remove_child(current_scene) #123
-		current_scene.queue_free()
-		root.add_child(new_scene)
-		get_tree().set_current_scene(new_scene)
-		
-	else:
-		print("Ошибка загрузки сцены:", scene_name)
+	get_tree().change_scene(scene_name)
 
-
-func pausee(s=1):
-	get_tree().paused = bool(s)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if !s else Input.MOUSE_MODE_VISIBLE)
+func pausee(a):
+	is_pause = a
+	get_tree().paused = is_pause
+	
 
 func sub(s):
 	var n = load("res://Scenes/"+s+".tscn").instance()

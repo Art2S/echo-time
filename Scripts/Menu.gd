@@ -6,6 +6,8 @@ onready var start_btn = $Start_Button
 
 func _ready():
 	start_btn.grab_focus()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Singleton.pausee(0)
 
 
 
@@ -41,7 +43,7 @@ func _on_No_Button_pressed():
 func _on_Yes_Button_pressed():
 	Singleton.delete_save()
 	Singleton.change_scene("res://Scenes/Game.tscn")
-	Singleton.save_game()
+	#Singleton.save_game()
 	
 
 
