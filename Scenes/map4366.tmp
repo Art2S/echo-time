@@ -1,0 +1,57 @@
+[gd_scene load_steps=13 format=4 uid="uid://kd80oetdg8ar"]
+
+[ext_resource type="PackedScene" uid="uid://fyylrtlxaod0" path="res://Scenes/Character.tscn" id="1_p4tdr"]
+[ext_resource type="Texture2D" uid="uid://bx7dt008qyjtj" path="res://Sprites/Tilemap/floor/grass_3.png" id="2_f5hdk"]
+[ext_resource type="Texture2D" uid="uid://cthavxlq6yngp" path="res://Sprites/Tilemap/floor/grass_4.png" id="3_1usuq"]
+[ext_resource type="Texture2D" uid="uid://b8om6aqux8uv0" path="res://Sprites/Tilemap/floor/grass_5.png" id="4_2ny8r"]
+[ext_resource type="Texture2D" uid="uid://wkvgi667ysnn" path="res://Sprites/Tilemap/floor/grass_6.png" id="5_yi378"]
+[ext_resource type="Texture2D" uid="uid://dmxhvckelawwp" path="res://Sprites/Tilemap/floor/grass_7.png" id="6_uis4m"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t8kwo"]
+texture = ExtResource("2_f5hdk")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t7e4f"]
+texture = ExtResource("3_1usuq")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1n73j"]
+texture = ExtResource("4_2ny8r")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wir4y"]
+texture = ExtResource("5_yi378")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71fj1"]
+texture = ExtResource("6_uis4m")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lgfbs"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_t8kwo")
+sources/1 = SubResource("TileSetAtlasSource_t7e4f")
+sources/2 = SubResource("TileSetAtlasSource_1n73j")
+sources/3 = SubResource("TileSetAtlasSource_wir4y")
+sources/4 = SubResource("TileSetAtlasSource_71fj1")
+
+[node name="Map" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_p4tdr")]
+speed = null
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -40)
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -1
+tile_map_data = PackedByteArray("AAAAAAAAAwAAAAAAAAD//wAAAwAAAAAAAAD/////AwAAAAAAAAAAAP//AwAAAAAAAAABAP//AwAAAAAAAAABAAAAAwAAAAAAAAABAAEAAwAAAAAAAAAAAAEAAwAAAAAAAAD//wEAAwAAAAAAAAD+/wEAAwAAAAAAAAD+/wAAAwAAAAAAAAD+////AwAAAAAAAAD+//7/AwAAAAAAAAD///7/AwAAAAAAAAAAAP7/AwAAAAAAAAABAP7/AwAAAAAAAAACAP7/AwAAAAAAAAACAP//AwAAAAAAAAACAAAAAwAAAAAAAAACAAEAAwAAAAAAAAD9//7/AwAAAAAAAAD9////AwAAAAAAAAD9/wAAAwAAAAAAAAD9/wEAAwAAAAAAAAA=")
+tile_set = SubResource("TileSet_lgfbs")
