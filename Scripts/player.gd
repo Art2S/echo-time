@@ -11,7 +11,9 @@ var direction : Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
+	$ShadowSprite.modulate.a = 0.5
 	state_machine.Initialize(self)
+	
 	pass
 
 func _physics_process(_delta):
@@ -49,7 +51,8 @@ func SetDirection() -> bool:
 	
 	cardinal_direction = new_dir
 	
-	player_sprite.scale.x = -1 if cardinal_direction == Vector2.LEFT else 1
+	# Отзеркаливание
+	#player_sprite.scale.x = -1 if cardinal_direction == Vector2.LEFT else 1
 	
 	return true
 
@@ -65,5 +68,7 @@ func AnimDirection() -> String:
 		return "down"
 	elif cardinal_direction == Vector2.UP:
 		return "up"
+	elif cardinal_direction == Vector2.LEFT:
+		return "left"
 	else:
-		return "side"
+		return "right"
