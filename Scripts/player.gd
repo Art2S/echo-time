@@ -10,6 +10,9 @@ var direction : Vector2 = Vector2.ZERO
 @onready var state_machine: PlayerStateMachine = $StateMachine
 
 
+var alive = true
+
+
 func _ready() -> void:
 	$ShadowSprite.modulate.a = 0.5
 	state_machine.Initialize(self)
@@ -18,19 +21,25 @@ func _ready() -> void:
 
 func _physics_process(_delta):
 	# ТП для удобства (на клавишу ё)
-	if Input.is_action_pressed("TELEPORT"):
-		$"../Player".position = Singleton.mouse_pos
-	
-	# Ходьба
-	move_and_slide()
+	if alive:
+		if Input.is_action_pressed("TELEPORT"):
+			$"../Player".position = Singleton.mouse_pos
+		# Ходьба
+		move_and_slide()
+		if Input.is_action_pressed("death(test)"):
+			$AnimationPlayer.play("death")
+			alive = false
+			$UI/Death_label.show()
+			$UI/Back_to_menu_button.show()
 	
 func _process(_delta: float) -> void:
 	#Вектор для ходьбы
-	direction = Vector2(
-		Input.get_axis("left", "right"),
-		Input.get_axis("up", "down")
-	).normalized()
-	pass
+	if alive:
+		direction = Vector2(
+			Input.get_axis("left", "right"),
+			Input.get_axis("up", "down")
+		).normalized()
+		pass
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -59,7 +68,8 @@ func SetDirection() -> bool:
 
 
 func UpdateAnimation(state : String) -> void:
-	animation_player.play(state + "_" + AnimDirection())
+	if alive:
+		animation_player.play(state + "_" + AnimDirection())
 	pass
 
 
@@ -72,3 +82,7 @@ func AnimDirection() -> String:
 		return "left"
 	else:
 		return "right"
+
+
+func _on_back_to_menu_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
