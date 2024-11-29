@@ -10,21 +10,23 @@ config_version=5
 
 [application]
 
-config/name="Echo times"
+config/name="Echo_times"
 run/main_scene="res://Scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/fullsize=false
 
 [autoload]
 
 Singleton="*res://Scripts/Singleton.gd"
+PlayerManager="*res://Player/scripts/global_player.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=3
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
+window/fullsize=true
 
 [input]
 
@@ -58,7 +60,7 @@ shift={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-Attack={
+attack={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
@@ -68,6 +70,16 @@ death(test)={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":84,"key_label":0,"unicode":116,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Постройки"
+2d_physics/layer_3="Игрок"
+2d_physics/layer_4="НПС"
+2d_physics/layer_9="Hitbox игрока"
+2d_physics/layer_10="Hitbox врагов"
+2d_physics/layer_11="HurtBox игрока"
+2d_physics/layer_12="Hurtbox врагов"
 
 [rendering]
 

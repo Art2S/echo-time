@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://kd80oetdg8ar"]
+[gd_scene load_steps=48 format=4 uid="uid://kd80oetdg8ar"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_gxfop"]
 [ext_resource type="Texture2D" uid="uid://bx7dt008qyjtj" path="res://Sprites/Tilemap/floor/grass_3.png" id="2_f5hdk"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://fyylrtlxaod0" path="res://Player/Player.tscn" id="21_4hkjn"]
 [ext_resource type="PackedScene" uid="uid://cm48iyr30dfox" path="res://Enemies/Boss_1/boss_1.tscn" id="21_alsvl"]
 [ext_resource type="Texture2D" uid="uid://bbsoc5dld1m2y" path="res://Sprites/Tilemap/floor/mainlevbuild.png" id="21_sb78s"]
-[ext_resource type="Script" path="res://Scripts/camera.gd" id="23_w06t7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t8kwo"]
 texture = ExtResource("2_f5hdk")
@@ -1223,10 +1222,9 @@ position = Vector2(-3, -4)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(1, -29)
-zoom = Vector2(2, 2)
+zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-script = ExtResource("23_w06t7")
 
 [node name="Boss_1" parent="." instance=ExtResource("21_alsvl")]
 position = Vector2(-60, 139)
