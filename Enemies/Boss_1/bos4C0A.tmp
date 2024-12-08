@@ -1,0 +1,137 @@
+[gd_scene load_steps=23 format=3 uid="uid://cm48iyr30dfox"]
+
+[ext_resource type="Texture2D" uid="uid://dxiwqnuqwdmmx" path="res://Sprites/Character/Shadow.png" id="1_7i2aw"]
+[ext_resource type="Script" path="res://Enemies/Scripts/enemy.gd" id="1_gf5vh"]
+[ext_resource type="Texture2D" uid="uid://cxo4tsl3sbi7m" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сбоку)2.png" id="2_admxl"]
+[ext_resource type="Texture2D" uid="uid://di45eqwq70lew" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид спереди)1.png" id="3_a8et5"]
+[ext_resource type="Texture2D" uid="uid://j8pw80kia3mq" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сбоку)3.png" id="3_solsq"]
+[ext_resource type="Texture2D" uid="uid://c683gubsuqmhw" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сбоку)1.png" id="4_c41hw"]
+[ext_resource type="Texture2D" uid="uid://d1oyr7tn56wdl" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сбоку)4.png" id="4_ctytg"]
+[ext_resource type="Texture2D" uid="uid://bll8ikxv4ok06" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сзади)1.png" id="5_4napl"]
+[ext_resource type="Texture2D" uid="uid://dj35losknt4iq" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сбоку)5.png" id="5_ft8ma"]
+[ext_resource type="Texture2D" uid="uid://nvcagc6i1472" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сзади)2.png" id="6_sa2yf"]
+[ext_resource type="Texture2D" uid="uid://dfkwju2ywuf30" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сзади)3.png" id="7_wgtu3"]
+[ext_resource type="Texture2D" uid="uid://c8h1403gdl1cy" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сзади)4.png" id="8_vg22y"]
+[ext_resource type="Texture2D" uid="uid://vdg7k7ep07v2" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид сзади)5.png" id="9_ep504"]
+[ext_resource type="Texture2D" uid="uid://dao7bj8jyaomj" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид спереди)2.png" id="10_8xncb"]
+[ext_resource type="Texture2D" uid="uid://bt33f23v4j4o3" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид спереди)3.png" id="11_g5g4f"]
+[ext_resource type="Texture2D" uid="uid://teecci0lg83" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид спереди)4.png" id="12_1cy7t"]
+[ext_resource type="Texture2D" uid="uid://dv36fqlga32r4" path="res://Sprites/Map/enemies/Boss_1/ходьба/ходьба(вид спереди)5.png" id="13_h7wkm"]
+[ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="18_1g27e"]
+[ext_resource type="Script" path="res://Enemies/Scripts/states/enemy_state_idle.gd" id="19_ficp1"]
+[ext_resource type="Script" path="res://Enemies/Scripts/states/enemy_state_wander.gd" id="20_jjyjh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0u75f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_a8et5")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_c41hw")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_4napl")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_8xncb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_g5g4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1cy7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_h7wkm")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_admxl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_solsq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ctytg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ft8ma")
+}],
+"loop": true,
+"name": &"move_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_sa2yf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wgtu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vg22y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ep504")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r43v3"]
+radius = 12.0
+height = 40.0
+
+[node name="Boss_1" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+motion_mode = 1
+script = ExtResource("1_gf5vh")
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(0.169245, 0.169245, 0.169245, 1)
+position = Vector2(0, 32)
+scale = Vector2(1.3125, 1.15625)
+texture = ExtResource("1_7i2aw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0u75f")
+animation = &"idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 31)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_r43v3")
+
+[node name="EnemyStateMachine" type="Node" parent="."]
+script = ExtResource("18_1g27e")
+
+[node name="Idle" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("after_idle_state")]
+script = ExtResource("19_ficp1")
+after_idle_state = NodePath("../Wander")
+
+[node name="Wander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("20_jjyjh")
+next_state = NodePath("../Idle")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://bapiup0217qtf"]
+[gd_scene load_steps=6 format=4 uid="uid://bapiup0217qtf"]
 
-[ext_resource type="PackedScene" uid="uid://fyylrtlxaod0" path="res://Scenes/Character.tscn" id="1_vaa3s"]
+[ext_resource type="PackedScene" uid="uid://fyylrtlxaod0" path="res://Player/Player.tscn" id="1_vaa3s"]
 [ext_resource type="Texture2D" uid="uid://bbsoc5dld1m2y" path="res://Sprites/Tilemap/floor/mainlevbuild.png" id="2_kmen1"]
 [ext_resource type="Texture2D" uid="uid://d2vidrfuqvw86" path="res://Sprites/Tilemap/floor/decorative.png" id="3_rw0jp"]
+[ext_resource type="PackedScene" uid="uid://cm48iyr30dfox" path="res://Enemies/Boss_1/boss_1.tscn" id="3_vxsgs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_es60f"]
 texture = ExtResource("2_kmen1")
@@ -1312,15 +1313,6 @@ sources/1 = SubResource("TileSetAtlasSource_0wb04")
 [node name="Map" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_vaa3s")]
-z_index = 3
-collision_mask = 7
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -40)
-zoom = Vector2(2.5, 2.5)
-position_smoothing_enabled = true
-
 [node name="TileMaps" type="Node2D" parent="."]
 
 [node name="Wall" type="TileMapLayer" parent="TileMaps"]
@@ -1387,3 +1379,13 @@ polygon = PackedVector2Array(-121, -230, -102, -230, -102, -235, -65, -235, -65,
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(0, 144)
 polygon = PackedVector2Array(-121, -230, -102, -230, -102, -235, -65, -235, -65, -230, -45, -230, -45, -298, -52, -298, -52, -325, -115, -325, -115, -298, -121, -298)
+[node name="Player" parent="." instance=ExtResource("1_vaa3s")]
+position = Vector2(2, -98)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Boss_1" parent="." instance=ExtResource("3_vxsgs")]
+position = Vector2(173, -1289)
